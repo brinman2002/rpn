@@ -36,7 +36,37 @@ lazy val publishSettings = Seq(
         <name>David Edwards</name>
         <email>david.l.edwards@gmail.com</email>
       </developer>
-    </developers>,
+      <developer>
+        <id>brinman2002</id>
+        <name>Brandon Inman</name>
+        <email>brandonathome@outlook.com</email>
+      </developer>
+    </developers>
+    <build>
+    <plugins>
+      <plugin>
+        <groupId>com.theoryinpractise</groupId>
+        <artifactId>clojure-maven-plugin</artifactId>
+        <version>1.3.2</version>
+        <executions>
+          <execution>
+            <id>compile-clojure</id>
+            <phase>compile</phase>
+            <goals>
+              <goal>compile</goal>
+            </goals>
+          </execution>
+          <execution>
+            <id>test-clojure</id>
+            <phase>test</phase>
+            <goals>
+              <goal>test</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
+    </plugins>
+  </build>,
   publishTo := Some(
     if (version.value endsWith "SNAPSHOT")
       "Sonatype Nexus Snapshot Repository" at "https://oss.sonatype.org/content/repositories/snapshots/"
@@ -65,3 +95,7 @@ lazy val rootProject = (project in file(".")).
     packMain := Map("rpnc" -> "com.loopfor.rpn.Compiler",
                     "rpn" -> "com.loopfor.rpn.Interpreter")
   )
+
+seq(clojure.settings :_*)
+
+libraryDependencies += "org.clojure" % "clojure" % "1.5.1"
