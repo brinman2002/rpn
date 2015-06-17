@@ -15,7 +15,6 @@
         (some #{c} (re-matches pattern (str (char c)))) (recur (.read is) is (str tok (char c)) pattern)
         :else {"b" c "token" tok }))))
 
-;TODO broken, needs to deal with whitespace correctly
 (defn ^:private tokenize [b is tokens]
   (let [c (char b) ]
     (let [result (cond
@@ -35,9 +34,7 @@
   (let [byteRead (.read is) ]
     (cond 
       (< byteRead 0) '() 
-      :else 
-        (let [tokens (tokenize byteRead is '())] 
-          (do (println tokens) (println (count tokens) ) (recur is))))))
+      :else (tokenize byteRead is '()) )))
 
 
 (defn ^:private parse [tokens]
