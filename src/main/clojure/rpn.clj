@@ -26,7 +26,9 @@
                     :else (throw (Exception. (.concat "Unknown token in stream " (.toString c)))))]
       (if (= -1 (get result "b"))
         (flatten (list tokens (get result "token")))
-        (recur (get result "b") is (flatten (list tokens (get result "token" ))))))))
+        (if (re-matches WHITESPACE_PATTERN (get result "token"))
+          (recur (get result "b") is tokens)
+          (recur (get result "b") is (flatten (list tokens (get result "token" )))))))))
 
 
 (defn ^:private lex [is] 
@@ -34,7 +36,7 @@
     (cond 
       (< byteRead 0) '() 
       :else 
-        (let [tokens (tokenize byteRead is (list))] 
+        (let [tokens (tokenize byteRead is '())] 
           (do (println tokens) (println (count tokens) ) (recur is))))))
 
 
