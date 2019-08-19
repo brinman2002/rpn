@@ -1,0 +1,18 @@
+{
+  "summary": {
+    "title": "Test Threat Model",
+    "owner": "Brandon",
+    "description": "Just a test"
+  },
+  "detail": {
+    "contributors": [],
+    "diagrams": [
+      {
+        "title": "Diagram 1",
+        "thumbnail": "./public/content/images/thumbnail.jpg",
+        "id": 0
+      }
+    ],
+    "reviewer": "Brandon"
+  }
+}
